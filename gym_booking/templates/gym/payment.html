@@ -1,0 +1,128 @@
+{% extends "base.html" %} {% block content %}{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-lg-12">
+      <section class="pb-4">
+        <div class="bg-white border rounded-5">
+          <img
+            src="{% static 'img/banner.jpg' %}"
+            class="d-block w-100"
+            alt="My image"
+            height="400vh"
+          />
+          <section class="w-100 p-4 d-flex justify-content-center pb-4">
+            <form
+              style="width: 22rem"
+              action="{% url 'gym_payment' %}"
+              method="POST"
+            >
+              <h5 class="pb-4">Gym Membership Registration</h5>
+              {% csrf_token %}
+            {% if messages %}
+        <ul class="messages" style="color: red;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} <br> <br>
+
+              <div class="form-outline mb-4">
+                <label
+                  class="form-label"
+                  for="form2Example1"
+                  style="margin-left: 0px"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="form2Example1"
+                  class="form-control"
+                  name="first_name"
+                  value="{{  user.first_name  }}"
+                  required
+                  disabled
+                />
+
+                <div class="form-notch">
+                  <div class="form-notch-leading" style="width: 9px"></div>
+                  <div class="form-notch-middle" style="width: 88.8px"></div>
+                  <div class="form-notch-trailing"></div>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label
+                  class="form-label"
+                  for="form2Example1"
+                  style="margin-left: 0px"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="form2Example1"
+                  class="form-control"
+                  name="last_child"
+                  value="{{  user.last_name  }}"
+                  required
+                  disabled
+                />
+
+                <div class="form-notch">
+                  <div class="form-notch-leading" style="width: 9px"></div>
+                  <div class="form-notch-middle" style="width: 88.8px"></div>
+                  <div class="form-notch-trailing"></div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <label
+                  class="form-label"
+                  for="form2Example1"
+                  style="margin-left: 0px"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="form2Example1"
+                  class="form-control"
+                  name="email"
+                  value="{{  user.email  }}"
+                  required
+                  disabled
+                />
+
+                <div class="form-notch">
+                  <div class="form-notch-leading" style="width: 9px"></div>
+                  <div class="form-notch-middle" style="width: 88.8px"></div>
+                  <div class="form-notch-trailing"></div>
+                </div>
+              </div>
+
+              <label
+                class="form-label"
+                for="form2Example1"
+                style="margin-left: 0px"
+                >Select Package :
+              </label>
+              <select
+                name="amount"
+                required
+                id="form2Example1"
+                class="form-control"
+              >
+                <option value="500">Bronze(NGN500)</option>
+                <option value="1000">Silver(NGN1000)</option>
+                <option value="1500">Gold(NGN1500)</option>
+              </select>
+              <!-- <p id="amt"></p> -->
+
+              <button type="submit" class="btn mt-4 btn-success btn-block mb-4">
+                Pay Now
+              </button>
+            </form>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}

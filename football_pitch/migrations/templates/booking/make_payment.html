@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}{% load static %}
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<div class="container mt-5">
+  <div class="row"><div class="col-md-12">
+	<div class="card">
+		<section class="pb-4">
+	<div class="bg-white border rounded-5">
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+	  
+	  <section class="w-100 p-4 d-flex justify-content-center pb-4">
+
+			<transaction><strong>Amount :</strong>{{ payment.amount }} <br> Ref. Id: {{ payment.ref }}</p>
+			
+
+			<button onclick="payWithPaystack()" class="btn btn-success btn-block mb-4">Make Payment</button>
+		</section>
+       
+    </div>
+    
+    
+  </div>
+</section>
+	</div>
+  </div></div>
+</div>
+
+<script>
+  function payWithPaystack() {
+    let currency = "NGN";
+    let plan = "";
+    let ref = "{{ payment.ref }}";
+    let amount = "{{ payment.amount }}";
+    let obj = {
+      key: "{{ paystack_pub_key }}",
+      email: "{{ payment.email }}",
+      amount: "{{ amount_value }}",
+      ref: ref,
+      callback: function (response) {
+        window.location.href = "{% url 'verify_payment' payment.ref %}";
+      },
+    };
+    if (Boolean(currency)) {
+      obj.currency = currency.toUpperCase();
+    }
+    if (Boolean(plan)) {
+      obj.plan - plan;
+    }
+
+    var handler = PaystackPop.setup(obj);
+    handler.openIframe();
+  }
+</script>
+{% endblock %}

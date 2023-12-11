@@ -1,0 +1,10 @@
+<!-- booking/templates/booking/booking_list.html -->
+<h2>Booking List</h2>
+<ul>
+  {% for booking in object_list %}
+  <li>
+    {{ booking.pitch.name }} - {{ booking.date }} {{ booking.start_time }} to {{
+    booking.end_time }}
+  </li>
+  {% endfor %}
+</ul>

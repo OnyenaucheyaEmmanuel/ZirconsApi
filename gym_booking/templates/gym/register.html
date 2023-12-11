@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}{% load static %}
+<div class="container">
+  <div class="row"><div class="col-md-4 col-lg-12">
+    <section class="pb-4">
+  <div class="bg-white border rounded-5">
+     <img
+        src="{% static 'img/banner4.jpg' %}"
+        class="d-block w-100"
+        alt="My image"
+        height="400vh"
+      />
+<!-- myapp/templates/registration.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h3 class="text-center my-4">User Registration</h3>
+    {% if messages %}
+        <ul class="messages text-center" style="color: red;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} <br>
+    <form method="post"  action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 mx-auto">
+               {{ form.as_p }}
+            </div>
+                  <span style="text-align: center;">Already have an account.<a href="{% url 'login' %}">Login</a> </span> <br> <br>
+
+          </div>        <button class="btn btn-success mb-3 float-center text-center" style="float: center; text-align: center; position: relative; left: 45%;" type="submit">Register</button>
+
+        </div>
+    </form>
+</body>
+</html>
+
+
+    
+    
+    
+    
+      
+      
+       
+    </div>
+    
+    
+  </div>
+</section>
+  </div></div>
+</div>
+{% endblock %}

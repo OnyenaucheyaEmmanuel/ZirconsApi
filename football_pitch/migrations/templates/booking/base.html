@@ -1,0 +1,128 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}MyApp{% endblock %}</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- {% block bootstrap %} -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- {% endblock %} -->
+  </head>
+  <body>
+    <header>
+      <!-- <h1>{% block header %}MyApp{% endblock %}</h1> -->
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="javascript:void(0)">Zircon</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mynavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Membership</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">About Us</a>
+              </li>
+            </ul>
+
+            <button class="btn btn-success" type="button">Login</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+      <div
+        class="container-fluid pb-5"
+        style="background-color: rgb(29, 155, 29)"
+      >
+        <div class="container pb-5 text-white">
+          <div class="row">
+            <h4 class="pt-5">Zircon</h4>
+            <div class="col-md-4 mb-5">
+              <p>
+                Experience a reliable gym platform and incredible football pitch
+                management for your team.
+              </p>
+              <h6 class="mt-4">Address</h6>
+              <p>
+                Church of God Mission Street, Boundary Road, Ekosodin 300103,
+                Benin City, Edo.
+              </p>
+              <p>+234 0906 499 2748</p>
+            </div>
+            <div class="col-md-4">
+              <h6>Quick Links</h6>
+              <p>About Us</p>
+
+              <p>Contact Us</p>
+
+              <p>Gym Portal</p>
+
+              <p>Football Pitch</p>
+            </div>
+            <div class="col-md-4 my-3">
+              <h6>Subscribe to our newsletter</h6>
+              <div class="card card-white py-4">
+                <form action="">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name=""
+                    id=""
+                    placeholder="Enter Your Email"
+                    style="
+                      border-top: 1px solid white;
+                      border-left: 1px solid white;
+                      border-right: 1px solid white;
+                    "
+                  />
+                  <button
+                    class="btn mt-4 btn-rounded btn-success"
+                    style="position: relative; left: 40%"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <hr />
+          <div class="text-center text-white">
+            <h6>Zircon</h6>
+            <p>2023 All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <hr />
+      </div>
+    </footer>
+
+    <!-- {% block JavaScript %} -->
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- {% endblock %} -->
+  </body>
+</html>

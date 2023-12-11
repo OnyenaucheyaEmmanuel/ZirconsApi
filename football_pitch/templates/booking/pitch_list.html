@@ -1,0 +1,7 @@
+<!-- booking/templates/booking/pitch_list.html -->
+<h2>Pitch List</h2>
+<ul>
+  {% for pitch in object_list %}
+  <li>{{ pitch.name }} - {{ pitch.location }}</li>
+  {% endfor %}
+</ul>

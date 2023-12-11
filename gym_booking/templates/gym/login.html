@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block content %}{% load static %}
+<div class="container ">
+  <div class="row">
+    <!-- <div class="col-md-4"></div> -->
+    <div class="col-md-4 col-lg-12"><div class="mx-auto ">
+         <img
+        src="{% static 'img/banner4.jpg' %}"
+        class="d-block w-100"
+        alt="My image"
+        height="400vh"
+      />
+      <section class="pb-4">
+  <div class="bg-white border ">
+    
+    <section class="w-100 p-4 d-flex justify-content-center pb-4">
+      <form style="width: 22rem;" action="{% url 'login' %}" method="POST">
+      <div class="text-center  pb-5">
+          <h5>Welcome Back</h5>
+        <p>Proceed to login to your Zircon Account</p>
+      </div>
+		{% csrf_token %}
+     {% if messages %}
+        <ul class="messages text-center" style="color: red;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} <br> <br>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1" style="margin-left: 0px;">Username</label>
+          <input type="text" id="form2Example1" class="form-control" name="username">
+        <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing"></div></div></div>
+
+        <!-- Password input -->
+        <div class="form-outline ">
+          <label class="form-label" for="form2Example2" style="margin-left: 0px;">Password</label>
+          <input type="password" id="form2Example2" class="form-control" name="password">
+        <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64px;"></div><div class="form-notch-trailing"></div></div></div>
+         <span>Dont have an account. </span><a href="{% url 'register' %}">Sign up</a> <br> <br>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
+
+      </form>
+    </section>
+
+    
+  
+    
+    
+      
+      
+       
+    </div>
+    
+    
+  </div>
+</section>
+    </div></div>
+    <!-- <div class="col-md-4"></div> -->
+
+  </div>
+</div>
+{% endblock %}
