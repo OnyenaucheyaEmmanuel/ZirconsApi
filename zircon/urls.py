@@ -41,7 +41,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/gym/', include('gym_booking.urls')),
     path('api/football/', include('football_pitch.urls')),
-    path('api/', schema_view.with_ui('swagger', cache_timeout=0),
+    path('', schema_view.with_ui('swagger', cache_timeout=0),
          name='schema-swagger-ui'),
 ]
 
