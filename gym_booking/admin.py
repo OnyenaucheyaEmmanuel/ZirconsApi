@@ -1,8 +1,11 @@
 # gym_booking/admin.py
 
 from django.contrib import admin
-from .models import GymMembership, Payment
+
 from gym_booking.models import CustomUser  # Import your CustomUser model
+
+from .models import GymMembership, Payment
+
 
 class GymMembershipAdmin(admin.ModelAdmin):
     list_display = ['user', 'plan', 'plan_status', 'created_at', 'expiration_date']
@@ -26,3 +29,5 @@ class PaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(GymMembership, GymMembershipAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(CustomUser)
+

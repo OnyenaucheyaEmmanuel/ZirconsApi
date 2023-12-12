@@ -8,16 +8,66 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 from .paystack import Paystack
-from .customuser import CustomUser
-
 # models.py
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+# models.py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
+from django.contrib.auth.models import BaseUserManager
+
+# myapp/models.py
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db import models
+from django.utils import timezone
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(username, email, password, **extra_fields)
+
+class CustomUser(AbstractUser):
+    user_id = models.IntegerField(unique=True, blank=True, null=True)
+
+    # Add unique related_name attributes for groups and user_permissions
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_groups',
+        blank=True,
+        verbose_name='groups',
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_user_permissions',
+        blank=True,
+        verbose_name='user permissions',
+        help_text='Specific permissions for this user.',
+    )
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.username
 
 
 class GymMembership(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, db_column='user_id')
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, db_column='user_id')
     expiration_date = models.DateTimeField(null=True, blank=True)
     plan = models.CharField(max_length=20, default='')
     plan_status = models.BooleanField(default=False)
