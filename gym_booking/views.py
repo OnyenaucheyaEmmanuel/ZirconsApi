@@ -1,83 +1,31 @@
-from .utils import generate_user_id  # Import the function
-
-from rest_framework import viewsets, status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from django.contrib.auth import get_user_model
-from .models import GymMembership, Payment
-from .serializers import GymMembershipSerializer, PaymentSerializer
-from .paystack import Paystack
-from rest_framework import permissions
-from django.shortcuts import get_object_or_404
-# gym_booking/views.py
-from rest_framework import generics
-from django.contrib.auth.models import User
-from rest_framework.response import Response
-from rest_framework import status
-from .serializers import UserRegistrationSerializer
-from django.contrib.auth import authenticate, login
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
-from rest_framework import generics, status
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from django.contrib.auth import login
-from .serializers import UserLoginSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from .models import GymMembership, Payment
-from django.shortcuts import render
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from .models import GymMembership, Payment
-from .serializers import PaymentSerializer  # Create this serializer if not already done
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.conf import settings
-from rest_framework import generics, status
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from django.contrib.auth.models import User
-from .serializers import UserRegistrationSerializer
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from .models import GymMembership, Payment
-from django.shortcuts import render, redirect
 from django.contrib import messages
-
-# views.py
-
-from rest_framework import generics, status
-from rest_framework.response import Response
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.models import User
-from .serializers import UserRegistrationSerializer
-
-# views.py
-
-from rest_framework import generics, status
+from django.shortcuts import get_object_or_404, redirect, render
+# gym_booking/views.py
+from rest_framework import generics, permissions, status, viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from django.contrib.auth.models import User
-from .models import GymMembership
-from .serializers import UserRegistrationSerializer, GymMembershipSerializer
+from rest_framework.views import APIView
 
-from rest_framework import generics, status
-from rest_framework.response import Response
-from .serializers import UserRegistrationSerializer
+from .models import CustomUser, GymMembership, Payment
+from .paystack import Paystack
+from .serializers import \
+    PaymentSerializer  # Create this serializer if not already done
+from .serializers import (GymMembershipSerializer, UserLoginSerializer,
+                          UserRegistrationSerializer)
 from .utils import generate_user_id  # Import the function
 
-from rest_framework import generics, status
-from rest_framework.response import Response
-from .serializers import UserRegistrationSerializer
-from .models import CustomUser
+# views.py
+
+
+# views.py
+
+
+
 class UserRegistrationAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserRegistrationSerializer
@@ -88,7 +36,7 @@ class UserRegistrationAPIView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         # Override the user_id with a 4-digit value
-        serializer.validated_data['user_id'] = generate_user_id()
+        # serializer.validated_data['user_id'] = generate_user_id()
 
         # Call the create method on the serializer
         self.perform_create(serializer)

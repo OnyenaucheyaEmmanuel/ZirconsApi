@@ -1,31 +1,21 @@
 # myapp/models.py
-from django.contrib.auth.models import User
-from django.db import models
-from django.utils import timezone
 from datetime import timedelta
-from django.core.mail import send_mail
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.conf import settings
-from .paystack import Paystack
-# models.py
 
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-# models.py
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.utils import timezone
-from django.core.mail import send_mail
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.conf import settings
-from django.contrib.auth.models import BaseUserManager
-
 # myapp/models.py
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+# models.py
+from django.contrib.auth.models import AbstractUser, BaseUserManager, User
+from django.core.mail import send_mail
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
+
+from .paystack import Paystack
+
+# models.py
+
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
