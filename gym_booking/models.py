@@ -56,6 +56,17 @@ class CustomUser(AbstractUser):
         return self.username
 
 
+from datetime import timedelta
+
+from django.core.mail import send_mail
+from django.db import models
+from django.utils import timezone
+
+from .models import \
+    CustomUser  # Assuming your CustomUser model is in a 'models' module
+from .paystack import Paystack
+
+
 class GymMembership(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, db_column='user_id')
     expiration_date = models.DateTimeField(null=True, blank=True)
@@ -81,19 +92,13 @@ class GymMembership(models.Model):
             send_mail(subject, message, from_email, to_email, fail_silently=False)
 
     def set_plan_status(self):
-        if self.expiration_date is not None and self.expiration_date > timezone.now():
-            self.plan_status = True
-        else:
-            self.plan_status = False
-        self.save()
-        return self.plan_status
+        new_plan_status = self.expiration_date is not None and self.expiration_date > timezone.now()
+        if self.plan_status != new_plan_status:
+            self.plan_status = new_plan_status
+            self.save()
 
     def get_plan_status(self):
         return self.plan_status
-
-    # @property
-    # def user_id(self):
-    #     return self.user.id if self.user else None
 
     @property
     def first_name(self):
@@ -102,7 +107,6 @@ class GymMembership(models.Model):
     @property
     def last_name(self):
         return self.user.last_name if self.user else None
-
 
 @receiver(post_save, sender=CustomUser)
 def create_user_membership(sender, instance, created, **kwargs):

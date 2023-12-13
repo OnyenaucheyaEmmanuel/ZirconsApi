@@ -9,9 +9,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ca@wg^*k60^5^x!3f&hua7796r+u=b2rv$p5#)ua_04owtf_%6'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,6 +135,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = 'static/'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # STATICFILES_DIRS = 'static/'
 STATIC_ROOT = "static/"
 # Default primary key field type
@@ -136,8 +145,8 @@ STATIC_ROOT = "static/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = '/profile/'
 # LOGIN_URL = 'login'
-PAYSTACK_SECRET_KEY = "sk_test_8f8610d7cc92a4d49d59648ff3db2570ad759ead"
-PAYSTACK_PUBLIC_KEY = "pk_test_97d3036c0defeb47fd4d32a6c759fa553574ee84"
+PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
+PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
@@ -150,7 +159,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Zircon Stadia",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "images/slogo.jpeg",
+    # "site_logo": "images/slogo.jpeg",
    
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
@@ -184,8 +193,8 @@ LOGIN_URL = 'accounts/login/'
 EMAIL_HOST = 'mail.swebslimited.com'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ucheemma@swebslimited.com'
-EMAIL_HOST_PASSWORD = 'Royalty@01'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # settings.py
 
