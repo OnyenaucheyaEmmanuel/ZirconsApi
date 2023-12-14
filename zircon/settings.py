@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Load environment variables from .env file
 
-load_dotenv()
+# load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = "django-insecure-ca@wg^*k60^5^x!3f&hua7796r+u=b2rv$p5#)ua_04owtf_%6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -138,15 +138,15 @@ STATIC_URL = 'static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # STATICFILES_DIRS = 'static/'
-STATIC_ROOT = BASE_DIR/'assets'
+STATIC_ROOT = BASE_DIR/'gym_booking/static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = '/profile/'
 # LOGIN_URL = 'login'
-PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
-PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
+PAYSTACK_SECRET_KEY ="sk_test_8f8610d7cc92a4d49d59648ff3db2570ad759ead"
+PAYSTACK_PUBLIC_KEY = "pk_test_97d3036c0defeb47fd4d32a6c759fa553574ee84"
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
@@ -193,8 +193,8 @@ LOGIN_URL = 'accounts/login/'
 EMAIL_HOST = 'mail.swebslimited.com'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = "ucheemma@swebslimited.com"
+EMAIL_HOST_PASSWORD = "Royalty@01"
 
 # settings.py
 
