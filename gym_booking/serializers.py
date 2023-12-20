@@ -1,36 +1,21 @@
 # myapp/serializers.py
-from rest_framework import serializers
-from .models import GymMembership, Payment
-from rest_framework import serializers
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import GymMembership
 # gym_booking/serializers.py
 from rest_framework import serializers
-from django.contrib.auth.models import User
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
+from .models import GymMembership, Payment
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
 class GymMembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = GymMembership
         fields = '__all__'
 from rest_framework import serializers
-from .models import CustomUser
 
-
-from rest_framework import serializers
 from .models import CustomUser
 from .utils import generate_user_id  # Import the function
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -103,7 +88,10 @@ class UserLoginSerializer(serializers.Serializer):
 
 
 
+
+
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = '__all__'
+        ref_name = 'gym_booking_payment'
